@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/part1/LevelPage.dart';
 import 'package:flutter_news/part1/RecentPage.dart';
 
 void main() => runApp(MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Flutter Demo Home Page'),
       routes: {
         '/recent': (context) => RecentPage(),
+        '/level': (context) => LevelPage(),
       },
     );
   }
@@ -45,22 +47,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             RaisedButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/recent');
               },
-              child: Text("Recent model"),
+              child: Text("最近浏览"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/level');
+              },
+              child: Text("等级列表"),
             ),
           ],
         ),
       ),
-//      floatingActionButton: FloatingActionButton(
-//        onPressed: _incrementCounter,
-//        tooltip: 'Increment',
-//        child: Icon(Icons.add),
-//      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
