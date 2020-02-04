@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/utils/SharedPreferenceUtil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountSettingsPage extends StatefulWidget {
   @override
@@ -262,7 +264,8 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
     setState(() {
       _isCheck = isCheck;
     });
-    print(_isCheck);
+    SharedPreferenceUtil.setBool("niming_switch_value", _isCheck);
+    print(SharedPreferenceUtil.getBool("niming_switch_value"));
   }
 
   @override
@@ -276,4 +279,5 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
     // TODO: implement dispose
     super.dispose();
   }
+
 }
