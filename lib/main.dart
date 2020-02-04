@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_news/part1/AccountSettingsPage.dart';
 import 'package:flutter_news/part1/LevelPage.dart';
 import 'package:flutter_news/part1/RecentPage.dart';
 
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/recent': (context) => RecentPage(),
         '/level': (context) => LevelPage(),
+        '/account': (context) => AccountSettingsPage(),
       },
     );
   }
@@ -45,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -60,6 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed('/level');
               },
               child: Text("等级列表"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/account');
+              },
+              child: Text("账号设置"),
             ),
           ],
         ),

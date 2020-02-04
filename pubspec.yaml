@@ -46,6 +46,7 @@ flutter:
     - assets/image/tizhilv.png
     - assets/image/tizhong.png
     - assets/image/tizhongkongzhiliang.png
+    - assets/image/head.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
