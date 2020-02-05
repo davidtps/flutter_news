@@ -17,6 +17,8 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
 
   var _imgPath; //图片文件
 
+  String _birthday = "2020-2-2";
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -159,7 +161,7 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    "19890125",
+                    _birthday,
                     style: TextStyle(fontSize: fontsize2, color: subTextColor),
                   ),
                   Icon(
@@ -169,6 +171,25 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
                 ],
               ),
             ),
+            onTap: () {
+              // 调用函数打开
+              showDatePicker(
+                context: context,
+                initialDate: new DateTime.now(),
+//                firstDate: new DateTime.now().subtract(new Duration(days: 30)), // 减 30 天
+//                lastDate: new DateTime.now().add(new Duration(days: 30)),       // 加 30 天
+                firstDate: DateTime(1950, 1),
+                lastDate: DateTime(2022, 1),
+              ).then((DateTime val) {
+                setState(() {
+                  _birthday = val.toString().substring(0, 10);
+                });
+                print(
+                    val.toString().substring(0, 10)); // 2018-07-12 00:00:00.000
+              }).catchError((err) {
+                print(err);
+              });
+            },
           ),
           Divider(thickness: 0.5, color: Colors.grey[300]),
           ListTile(
