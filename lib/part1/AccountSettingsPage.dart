@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/utils/SharedPreferenceUtil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AccountSettingsPage extends StatefulWidget {
   @override
@@ -14,6 +14,8 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
   Color subTextColor = Colors.grey;
   double rowHeight = 70;
   bool _isCheck = true;
+
+  var _imgPath; //图片文件
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
           ),
           Divider(thickness: 5, color: Colors.grey[300]),
           ListTile(
+            onTap: _showPicSelectDialog,
             title: Text(
               "头像",
               style: TextStyle(color: Colors.black, fontSize: fontsize1),
@@ -80,11 +83,12 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
                   ClipOval(
                     //图片裁剪的使用，圆形图片
                     clipBehavior: Clip.antiAlias,
-                    child: Image.asset(
-                      "assets/image/head.png",
-                      height: 40,
-                      width: 40,
-                    ),
+//                    child: Image.asset(
+//                      "assets/image/head.png",
+//                      height: 40,
+//                      width: 40,
+//                    ),
+                    child: _head_ImageView(_imgPath),
                   ),
                   Icon(
                     Icons.arrow_forward_ios,
@@ -234,9 +238,9 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
                 color: Colors.red, borderRadius: BorderRadius.circular(45)),
             child: Center(
                 child: Text(
-              "登出",
-              style: TextStyle(fontSize: fontsize1, color: Colors.white),
-            )),
+                  "登出",
+                  style: TextStyle(fontSize: fontsize1, color: Colors.white),
+                )),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
@@ -280,4 +284,72 @@ class AccountSettingsPageState extends State<AccountSettingsPage> {
     super.dispose();
   }
 
+  void _showPicSelectDialog() {
+    showDialog<Null>(
+      context: context,
+      builder: (BuildContext context) {
+        return new SimpleDialog(
+          title: new Text('选择'),
+          children: <Widget>[
+            new SimpleDialogOption(
+              child: new Text('拍照'),
+              onPressed: _takePhoto,
+
+//              {
+//                _takePhoto;
+//                Navigator.pop(context);
+//              },
+            ),
+            new SimpleDialogOption(
+              child: new Text('相册'),
+              onPressed: _openGallery,
+//              onPressed: () {
+//                Navigator.of(context).pop(); //关闭对话框
+//              },
+            ),
+          ],
+        );
+      },
+    ).then((val) {
+      print(val);
+    });
+  }
+
+  /*拍照*/
+  _takePhoto() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _imgPath = image;
+    });
+    print(_imgPath);
+    Navigator.pop(context);
+  }
+
+  /*相册*/
+  _openGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      _imgPath = image;
+    });
+    print(_imgPath);
+    Navigator.pop(context);
+  }
+
+  /*头像图片控件*/
+  Widget _head_ImageView(imgPath) {
+    if (imgPath == null) {
+      return Image.asset(
+        "assets/image/head.png",
+        height: 40,
+        width: 40,
+      );
+    } else {
+      return Image.file(
+        imgPath,
+        width: 40,
+        height: 40,
+        fit: BoxFit.cover,
+      );
+    }
+  }
 }
