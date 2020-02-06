@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_news/part1/AccountSettingsPage.dart';
 import 'package:flutter_news/part1/LevelPage.dart';
 import 'package:flutter_news/part1/RecentPage.dart';
+import 'package:flutter_news/part1/SmallVideoPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         '/recent': (context) => RecentPage(),
         '/level': (context) => LevelPage(),
         '/account': (context) => AccountSettingsPage(),
+        '/video': (context) => SmallVideoPage(),
       },
     );
   }
@@ -69,6 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed('/account');
               },
               child: Text("账号设置"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/video');
+              },
+              child: Text("小视频"),
             ),
           ],
         ),
