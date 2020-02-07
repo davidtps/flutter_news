@@ -4,6 +4,7 @@ import 'package:flutter_news/part1/AccountSettingsPage.dart';
 import 'package:flutter_news/part1/LevelPage.dart';
 import 'package:flutter_news/part1/RecentPage.dart';
 import 'package:flutter_news/part1/SmallVideoPage.dart';
+import 'package:flutter_news/part1/SquarePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/level': (context) => LevelPage(),
         '/account': (context) => AccountSettingsPage(),
         '/video': (context) => SmallVideoPage(),
+        '/square': (context) => SquarePage(),
       },
     );
   }
@@ -77,6 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed('/video');
               },
               child: Text("小视频"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/square');
+              },
+              child: Text("圈子"),
             ),
           ],
         ),
