@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/part1/AccountSettingsPage.dart';
+import 'package:flutter_news/part1/FreeFlowNewsPage.dart';
 import 'package:flutter_news/part1/LevelPage.dart';
 import 'package:flutter_news/part1/RecentPage.dart';
 import 'package:flutter_news/part1/SmallVideoPage.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/account': (context) => AccountSettingsPage(),
         '/video': (context) => SmallVideoPage(),
         '/square': (context) => SquarePage(),
+        '/freeflownews': (context) => FreeFlowNewsPage(),
       },
     );
   }
@@ -85,6 +87,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.of(context).pushNamed('/square');
               },
               child: Text("圈子"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/freeflownews');
+              },
+              child: Text("免流量新闻"),
             ),
           ],
         ),
