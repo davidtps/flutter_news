@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_news/part2/content1/DrawerPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -145,12 +147,17 @@ class _MyHomePageState extends State<MyHomePage> {
           changeIndex(index);
         },
       ),
+      drawer: DrawerPage(),
+      drawerEdgeDragWidth: 100,
+      drawerDragStartBehavior: DragStartBehavior.start,
     );
   }
 
   void changeIndex(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    if (index != _currentIndex) {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 }
