@@ -12,9 +12,9 @@ class DrawerPageState extends State<DrawerPage> {
 
     return SizedBox(
       child: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('侧边栏'),
-        ),
+//        appBar: new AppBar(
+//          title: new Text('侧边栏'),
+//        ),
       ),
       width: width * 4 / 5,
     );

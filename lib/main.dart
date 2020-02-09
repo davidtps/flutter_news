@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_news/part1/AllItemsPage.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
 
 void main() => runApp(MyApp());
@@ -8,21 +10,26 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //设置系统状态栏颜色
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.blue));
     return MaterialApp(
+      //隐藏调试banner
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: MyHomePage(title: '首页'),
-//      routes: {
+      routes: {
 //        '/recent': (context) => RecentPage(),
 //        '/level': (context) => LevelPage(),
 //        '/account': (context) => AccountSettingsPage(),
 //        '/video': (context) => SmallVideoPage(),
 //        '/square': (context) => SquarePage(),
 //        '/freeflownews': (context) => FreeFlowNewsPage(),
-//        '/allitems': (context) => AllItemsPage(),
-//      },
+        '/allitems': (context) => AllItemsPage(),
+      },
     );
   }
 }
@@ -42,9 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: buildAppBar(context),
       body: Container(
         child: Text("内容"),
 //        child: Column(
@@ -125,10 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
             activeIcon: Icon(Icons.my_location),
           ),
           BottomNavigationBarItem(
-            title: Text(
-              "我的",
-              style: TextStyle(fontSize: 14, color: Colors.black),
-            ),
+            title: Text("我的"),
             icon: Icon(
               Icons.face,
               size: 24,
@@ -160,4 +162,74 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
+}
+
+Widget buildAppBar(BuildContext context) {
+  return AppBar(
+    backgroundColor: Colors.red,
+//    leading: Icon(Icons.add),
+    title: Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(45),
+          color: Colors.red[200],
+          border: Border.all(
+            color: Colors.redAccent,
+            width: 1,
+            style: BorderStyle.solid,
+          )),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.search,
+            size: 16,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Text(
+              "点击进行搜索啊！",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+              ),
+            ),
+          )
+        ],
+      ),
+    ),
+    actions: <Widget>[
+      InkWell(
+        child: Icon(
+          Icons.whatshot,
+          size: 24,
+        ),
+        onTap: () {
+          print("热门");
+        },
+      ),
+      InkWell(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
+          child: Icon(
+            Icons.chat,
+            size: 24,
+          ),
+        ),
+        onTap: () {
+          print("圈子");
+        },
+      ),
+      InkWell(
+        child: Icon(
+          Icons.format_list_bulleted,
+          size: 24,
+        ),
+        onTap: () {
+          print("所有栏目");
+          Navigator.of(context).pushNamed("/allitems");
+        },
+      ),
+    ],
+  );
 }
