@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_news/part1/AllItemsPage.dart';
+import 'package:flutter_news/part2/SearchBar.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
 
 void main() => runApp(MyApp());
@@ -168,35 +169,54 @@ Widget buildAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.red,
 //    leading: Icon(Icons.add),
-    title: Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(45),
-          color: Colors.red[200],
-          border: Border.all(
-            color: Colors.redAccent,
-            width: 1,
-            style: BorderStyle.solid,
-          )),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(
-            Icons.search,
-            size: 16,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            child: Text(
-              "点击进行搜索啊！",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
+    titleSpacing: 5,
+    title: GestureDetector(
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(45),
+            color: Colors.red[200],
+            border: Border.all(
+              color: Colors.redAccent,
+              width: 1,
+              style: BorderStyle.solid,
+            )),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              Icons.search,
+              size: 16,
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Text(
+                "点击进行搜索啊！",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return SearchBar(
+            Colors.white,
+            onCancelSearch: _onCancelSeardch(context),
+          );
+        }));
+//          Navigator
+//              .of(context)
+//              .push(
+//              PageRouteBuilder(pageBuilder: (BuildContext context,
+//                  Animation<double> animation,
+//                  Animation<double> secondaryAnimation) {
+//                return SearchBar();
+//              },)
+      },
     ),
     actions: <Widget>[
       InkWell(
@@ -232,4 +252,9 @@ Widget buildAppBar(BuildContext context) {
       ),
     ],
   );
+}
+
+//搜索页面的取消搜索事件
+_onCancelSeardch(BuildContext context) {
+//  Navigator.pop(context);
 }
