@@ -99,83 +99,83 @@ class SearchBarState extends State<SearchBar> {
     // TODO: implement dispose
     super.dispose();
   }
-}
 
-Widget TitleContent() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      Container(
-        height: 30,
-        width: 250,
-        margin: EdgeInsets.all(5),
-        child: Center(
-          child: TextField(
-            //键盘类型
-            keyboardType: TextInputType.phone,
-            //键盘主题
-            keyboardAppearance: Brightness.light,
-            //键盘回车键的按钮类型
-            textInputAction: TextInputAction.search,
-            //键盘输入类型（英文大写、小写、文字、数字等）
-            textCapitalization: TextCapitalization.characters,
+  Widget TitleContent() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Container(
+          height: 30,
+          width: 250,
+          margin: EdgeInsets.all(5),
+          child: Center(
+            child: TextField(
+              //键盘类型
+              keyboardType: TextInputType.phone,
+              //键盘主题
+              keyboardAppearance: Brightness.light,
+              //键盘回车键的按钮类型
+              textInputAction: TextInputAction.search,
+              //键盘输入类型（英文大写、小写、文字、数字等）
+              textCapitalization: TextCapitalization.characters,
 
-            controller: TextEditingController(text: ""),
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                //hint
-                hintText: "搜索关键字",
-                hintStyle: TextStyle(
-                  color: Colors.black38,
-                  fontSize: 15,
-                ),
+              controller: TextEditingController(text: ""),
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                  //hint
+                  hintText: "搜索关键字",
+                  hintStyle: TextStyle(
+                    color: Colors.black38,
+                    fontSize: 15,
+                  ),
 
-                //前缀图标、文字prefixText等
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 20,
-                  color: Colors.grey,
-                ),
-                //后缀图标、文字prefixText等
-                suffixIcon: Icon(
-                  Icons.close,
-                  size: 20,
-                  color: Colors.grey,
-                ),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(45)),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                      width: 1,
-                      style: BorderStyle.solid,
-                    )),
+                  //前缀图标、文字prefixText等
+                  prefixIcon: Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.grey,
+                  ),
+                  //后缀图标、文字prefixText等
+                  suffixIcon: Icon(
+                    Icons.close,
+                    size: 20,
+                    color: Colors.grey,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(45)),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1,
+                        style: BorderStyle.solid,
+                      )),
 //                      focusColor: Colors.black38,
 //                      labelStyle: TextStyle(
 //                          color: Colors.grey,
 //                          fontSize: 15,
 //                          backgroundColor: Colors.blue),
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 1,
-                        color: Colors.blue[200],
-                        style: BorderStyle.solid))),
-            maxLines: 1,
-            autofocus: true,
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1,
+                          color: Colors.blue[200],
+                          style: BorderStyle.solid))),
+              maxLines: 1,
+              autofocus: true,
 //                  textAlign: TextAlign.justify,
-            //光标颜色
-            cursorColor: Colors.pink,
+              //光标颜色
+              cursorColor: Colors.pink,
 //                  textAlignVertical: TextAlignVertical.center, //???
+            ),
           ),
         ),
-      ),
-      Padding(
-        child: Text(
-          "搜索",
-          style: TextStyle(color: Colors.black38, fontSize: 16),
+        Padding(
+          child: Text(
+            "搜索",
+            style: TextStyle(color: Colors.black38, fontSize: 16),
+          ),
+          padding: EdgeInsets.all(5),
         ),
-        padding: EdgeInsets.all(5),
-      ),
-    ],
-  );
+      ],
+    );
+  }
 }

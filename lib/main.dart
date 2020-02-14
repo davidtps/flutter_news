@@ -163,51 +163,50 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
   }
-}
 
-Widget buildAppBar(BuildContext context) {
-  return AppBar(
-    backgroundColor: Colors.red,
+  Widget buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.red,
 //    leading: Icon(Icons.add),
-    titleSpacing: 5,
-    title: GestureDetector(
-      child: Container(
-        padding: EdgeInsets.all(8),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(45),
-            color: Colors.red[200],
-            border: Border.all(
-              color: Colors.redAccent,
-              width: 1,
-              style: BorderStyle.solid,
-            )),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(
-              Icons.search,
-              size: 16,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Text(
-                "点击进行搜索啊！",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                ),
+      titleSpacing: 5,
+      title: GestureDetector(
+        child: Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(45),
+              color: Colors.red[200],
+              border: Border.all(
+                color: Colors.redAccent,
+                width: 1,
+                style: BorderStyle.solid,
+              )),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.search,
+                size: 16,
               ),
-            )
-          ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: Text(
+                  "点击进行搜索啊！",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return SearchBar(
-            Colors.white,
-            onCancelSearch: _onCancelSeardch(context),
-          );
-        }));
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SearchBar(
+              Colors.white,
+              onCancelSearch: _onCancelSeardch,
+            );
+          }));
 //          Navigator
 //              .of(context)
 //              .push(
@@ -216,45 +215,46 @@ Widget buildAppBar(BuildContext context) {
 //                  Animation<double> secondaryAnimation) {
 //                return SearchBar();
 //              },)
-      },
-    ),
-    actions: <Widget>[
-      InkWell(
-        child: Icon(
-          Icons.whatshot,
-          size: 24,
-        ),
-        onTap: () {
-          print("热门");
         },
       ),
-      InkWell(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+      actions: <Widget>[
+        InkWell(
           child: Icon(
-            Icons.chat,
+            Icons.whatshot,
             size: 24,
           ),
+          onTap: () {
+            print("热门");
+          },
         ),
-        onTap: () {
-          print("圈子");
-        },
-      ),
-      InkWell(
-        child: Icon(
-          Icons.format_list_bulleted,
-          size: 24,
+        InkWell(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5),
+            child: Icon(
+              Icons.chat,
+              size: 24,
+            ),
+          ),
+          onTap: () {
+            print("圈子");
+          },
         ),
-        onTap: () {
-          print("所有栏目");
-          Navigator.of(context).pushNamed("/allitems");
-        },
-      ),
-    ],
-  );
-}
+        InkWell(
+          child: Icon(
+            Icons.format_list_bulleted,
+            size: 24,
+          ),
+          onTap: () {
+            print("所有栏目");
+            Navigator.of(context).pushNamed("/allitems");
+          },
+        ),
+      ],
+    );
+  }
 
-//搜索页面的取消搜索事件
-_onCancelSeardch(BuildContext context) {
-//  Navigator.pop(context);
+  //搜索页面的取消搜索事件
+  _onCancelSeardch() {
+    Navigator.of(context).pop(); //  方法要放在state里面，才会有context上下文
+  }
 }
