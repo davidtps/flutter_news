@@ -76,6 +76,7 @@ class SearchBarState extends State<SearchBar> {
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: widget.statusbarcolor,
+        brightness: Brightness.light,
         leading: IconButton(
           padding: EdgeInsets.all(5),
           icon: Icon(
@@ -230,6 +231,16 @@ class TitleContentsState extends State<TitleContents> {
           margin: EdgeInsets.all(5),
           child: Center(
             child: TextField(
+
+              /// 文字有关的：
+
+//              obscureText: true, //密码
+              // 长按时的候选菜单（复制、剪切、粘贴、全部）
+              // 不设置该属性，默认使用 select all(全部) 和 paste(粘贴)
+              // obscureText为true，那么Copy(复制) 和 cut(剪切)禁用
+              // readOnly为true，那么paste(粘贴) 和 cut(剪切)禁用
+              // toolbarOptions: ToolbarOptions(),
+
               controller: _searchController,
               onChanged: widget.searchChange,
               onEditingComplete: _searchComplete,
@@ -238,7 +249,7 @@ class TitleContentsState extends State<TitleContents> {
               //键盘类型
               keyboardType: TextInputType.phone,
               //键盘主题
-              keyboardAppearance: Brightness.light,
+              keyboardAppearance: Brightness.dark,
               //键盘回车键的按钮类型
               textInputAction: TextInputAction.search,
               //键盘输入类型（英文大写、小写、文字、数字等）

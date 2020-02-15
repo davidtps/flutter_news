@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //设置系统状态栏颜色
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.blue));
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       //隐藏调试banner
       debugShowCheckedModeBanner: false,
@@ -201,22 +201,39 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return SearchBar(
-              Colors.white,
-              onCancelSearch: _onCancelSeardch,
-              onSearchChange: _onSearchChange,
-              onSearchSubmmit: _onSubmitData,
-            );
-          }));
-//          Navigator
-//              .of(context)
-//              .push(
-//              PageRouteBuilder(pageBuilder: (BuildContext context,
-//                  Animation<double> animation,
-//                  Animation<double> secondaryAnimation) {
-//                return SearchBar();
-//              },)
+//          Navigator.push(context, MaterialPageRoute(builder: (context) {
+//            return SearchBar(
+//              Colors.white,
+//              onCancelSearch: _onCancelSeardch,
+//              onSearchChange: _onSearchChange,
+//              onSearchSubmmit: _onSubmitData,
+//            );
+//          }));
+          Navigator.of(context).push(
+            PageRouteBuilder(
+                pageBuilder: (BuildContext context, Animation<double> animation,
+                    Animation<double> secondaryAnimation) {
+                  return SearchBar(
+                    Colors.white,
+                    onCancelSearch: _onCancelSeardch,
+                    onSearchChange: _onSearchChange,
+                    onSearchSubmmit: _onSubmitData,
+                  );
+                },
+                transitionsBuilder: (BuildContext context,
+                    Animation<double> animation,
+                    Animation<double> secondaryAnimation,
+                    Widget child) {
+                  return SlideTransition(
+                    position: Tween(
+                      begin: Offset(1.0, 0.0),
+                      end: Offset(0, 0),
+                    ).animate(animation),
+                    child: child,
+                  );
+                },
+                transitionDuration: Duration(milliseconds: 200)),
+          );
         },
       ),
       actions: <Widget>[

@@ -12,6 +12,7 @@ class DrawerPageState extends State<DrawerPage> {
 
     return SizedBox(
       child: new Scaffold(
+        backgroundColor: Colors.redAccent,
 //        appBar: new AppBar(
 //          title: new Text('侧边栏'),
 //        ),
