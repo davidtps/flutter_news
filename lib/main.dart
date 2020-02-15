@@ -3,8 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_news/part1/AllItemsPage.dart';
-import 'package:flutter_news/part2/SearchBar.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
+import 'package:flutter_news/part2/content1/SearchBar.dart';
 
 void main() => runApp(MyApp());
 
@@ -205,6 +205,8 @@ class _MyHomePageState extends State<MyHomePage> {
             return SearchBar(
               Colors.white,
               onCancelSearch: _onCancelSeardch,
+              onSearchChange: _onSearchChange,
+              onSearchSubmmit: _onSubmitData,
             );
           }));
 //          Navigator
@@ -256,5 +258,13 @@ class _MyHomePageState extends State<MyHomePage> {
   //搜索页面的取消搜索事件
   _onCancelSeardch() {
     Navigator.of(context).pop(); //  方法要放在state里面，才会有context上下文
+  }
+
+  _onSearchChange(String data) {
+    print("搜索输入框输入字符串：$data");
+  }
+
+  _onSubmitData(String data) {
+    print("提交输入字符串：$data");
   }
 }
