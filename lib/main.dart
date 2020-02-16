@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_news/part2/content1/AllItemsPage.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
+import 'package:flutter_news/part2/content1/HotPage.dart';
+import 'package:flutter_news/part2/content1/NoticePage.dart';
 import 'package:flutter_news/part2/content1/SearchBar.dart';
+import 'package:flutter_news/part2/content1/TabContentPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,6 +33,8 @@ class MyApp extends StatelessWidget {
 //        '/square': (context) => SquarePage(),
 //        '/freeflownews': (context) => FreeFlowNewsPage(),
         '/allitems': (context) => AllItemsPage(),
+        "/hot": (context) => HotPage(),
+        "/notice": (context) => NoticePage(),
       },
     );
   }
@@ -107,11 +112,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: buildAppBar(context),
       body: TabBarView(
-        children: tabs.map((Tab tab) {
-          return Center(
-            child: Text('${tab.text}'),
-          );
-        }).toList(),
+//        children: tabs.map((Tab tab) {
+//          return Center(
+//            child: Text('${tab.text}'),
+//          );
+//        }).toList(),
+        children: tabContents,
         controller: tabController,
       ),
 //      body: Container(
@@ -307,6 +313,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           onTap: () {
             print("热门");
+            Navigator.of(context).pushNamed("/hot");
           },
         ),
         InkWell(
@@ -318,7 +325,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
           ),
           onTap: () {
-            print("圈子");
+            print("通知");
+            Navigator.of(context).pushNamed("/notice");
           },
         ),
         InkWell(
