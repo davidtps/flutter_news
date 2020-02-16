@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_news/part1/AllItemsPage.dart';
+import 'package:flutter_news/part2/content1/AllItemsPage.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
 import 'package:flutter_news/part2/content1/SearchBar.dart';
 
