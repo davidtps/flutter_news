@@ -44,63 +44,124 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int _currentIndex = 0;
+  TabController tabController;
+  final List<Tab> tabs = [
+    Tab(text: '头条'),
+    Tab(text: '视频'),
+    Tab(text: '娱乐'),
+    Tab(text: '体育'),
+    Tab(text: '新时代'),
+    Tab(text: '要闻'),
+    Tab(text: '段子'),
+    Tab(text: '知否'),
+    Tab(text: '上海'),
+    Tab(text: '公开课'),
+    Tab(text: '圈子'),
+    Tab(text: '财经'),
+    Tab(text: '科技'),
+    Tab(text: '汽车'),
+    Tab(text: '网易号'),
+    Tab(text: '军事'),
+    Tab(text: '时尚'),
+    Tab(text: '跟帖'),
+    Tab(text: '直播'),
+    Tab(text: '图片'),
+    Tab(text: '小视频'),
+    Tab(text: 'NBA'),
+    Tab(text: '热点'),
+    Tab(text: '房产'),
+    Tab(text: '股票'),
+    Tab(text: '轻松一刻'),
+    Tab(text: '历史'),
+    Tab(text: '家居'),
+    Tab(text: '播单'),
+    Tab(text: '独家'),
+    Tab(text: '游戏'),
+    Tab(text: '健康'),
+    Tab(text: '航空'),
+    Tab(text: '小说'),
+    Tab(text: '热度'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(
+      length: tabs.length,
+      vsync: this,
+      initialIndex: 2,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
-      body: Container(
-        child: Text("内容"),
-//        child: Column(
-//          mainAxisAlignment: MainAxisAlignment.start,
-//          children: <Widget>[
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/recent');
-//              },
-//              child: Text("最近浏览"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/level');
-//              },
-//              child: Text("等级列表"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/account');
-//              },
-//              child: Text("账号设置"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/video');
-//              },
-//              child: Text("小视频"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/square');
-//              },
-//              child: Text("圈子"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/freeflownews');
-//              },
-//              child: Text("免流量新闻"),
-//            ),
-//            RaisedButton(
-//              onPressed: () {
-//                Navigator.of(context).pushNamed('/allitems');
-//              },
-//              child: Text("全部栏目"),
-//            ),
-//          ],
-//        ),
+      body: TabBarView(
+        children: tabs.map((Tab tab) {
+          return Center(
+            child: Text('${tab.text}'),
+          );
+        }).toList(),
+        controller: tabController,
       ),
+//      body: Container(
+//        child: Text("内容"),
+////        child: Column(
+////          mainAxisAlignment: MainAxisAlignment.start,
+////          children: <Widget>[
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/recent');
+////              },
+////              child: Text("最近浏览"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/level');
+////              },
+////              child: Text("等级列表"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/account');
+////              },
+////              child: Text("账号设置"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/video');
+////              },
+////              child: Text("小视频"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/square');
+////              },
+////              child: Text("圈子"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/freeflownews');
+////              },
+////              child: Text("免流量新闻"),
+////            ),
+////            RaisedButton(
+////              onPressed: () {
+////                Navigator.of(context).pushNamed('/allitems');
+////              },
+////              child: Text("全部栏目"),
+////            ),
+////          ],
+////        ),
+//      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -269,6 +330,26 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
       ],
+      bottom: PreferredSize(
+          child: Material(
+            //tabs 背景色
+            color: Colors.redAccent,
+            child: TabBar(
+              tabs: tabs,
+              controller: tabController,
+              isScrollable: true,
+              //label
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: Colors.yellow,
+              indicatorPadding: EdgeInsets.symmetric(horizontal: 2),
+              //线的高度
+              indicatorWeight: 3,
+              onTap: (index) {
+                print("tab $index");
+              },
+            ),
+          ),
+          preferredSize: Size.fromHeight(50)),
     );
   }
 
