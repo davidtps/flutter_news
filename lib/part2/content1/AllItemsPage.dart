@@ -220,6 +220,8 @@ class AllItemsPageState extends State<AllItemsPage> {
 //      focusNode: FocusNode(debugLabel: '关注'),
       onPressed: () {
         print(data);
+        int selIndex = allDatas.indexOf(data);
+        Navigator.pop(context, selIndex);
         Toast.toast(context, msg: data, position: ToastPostion.bottom);
       },
 //      avatar: CircleAvatar(

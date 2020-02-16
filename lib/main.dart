@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   int _currentIndex = 0;
   TabController tabController;
   final List<Tab> tabs = [
+    Tab(text: '关注'),
     Tab(text: '头条'),
     Tab(text: '视频'),
     Tab(text: '娱乐'),
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     tabController = TabController(
       length: tabs.length,
       vsync: this,
-      initialIndex: 2,
+      initialIndex: 1,
     );
   }
 
@@ -326,7 +327,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           onTap: () {
             print("所有栏目");
-            Navigator.of(context).pushNamed("/allitems");
+//            Navigator.of(context).pushNamed("/allitems");
+            jumpAllItemPage().then((index) {
+              setState(() {
+                tabController.index = index;
+              });
+            });
           },
         ),
       ],
@@ -364,5 +370,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   _onSubmitData(String data) {
     print("提交输入字符串：$data");
+  }
+
+  Future<int> jumpAllItemPage() async {
+    var index = await Navigator.of(context).pushNamed("/allitems");
+    return index;
   }
 }
