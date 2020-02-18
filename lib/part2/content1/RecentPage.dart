@@ -9,8 +9,7 @@ class RecentPage extends StatefulWidget {
 class RecentPageState extends State<RecentPage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: Column(
+    return Column(
         children: <Widget>[
           ListTile(
             title: Text("最近浏览"),
@@ -41,7 +40,6 @@ class RecentPageState extends State<RecentPage> {
             ],
           )
         ],
-      ),
     );
   }
 
