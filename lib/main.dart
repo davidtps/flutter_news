@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_news/part1/SmallVideoPage.dart';
 import 'package:flutter_news/part2/content1/AllItemsPage.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
-import 'package:flutter_news/part2/content1/HomePage.dart';
+import 'package:flutter_news/part2/content1/home/HomePage.dart';
 import 'package:flutter_news/part2/content1/HotPage.dart';
 import 'package:flutter_news/part2/content1/NoticePage.dart';
 

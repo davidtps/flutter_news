@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/part2/content1/HomeItemListPage.dart';
+import 'package:flutter_news/part2/content1/home/HomeItemListPage.dart';
 
 List<Widget> tabContents = [
 //  RecentPage(),

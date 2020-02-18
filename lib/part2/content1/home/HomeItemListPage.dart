@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/part2/content1/RecentPage.dart';
+import 'package:flutter_news/part2/content1/home/RecentPage.dart';
 
 class HomeItemListPage extends StatefulWidget {
   @override
