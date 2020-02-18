@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/part2/content1/SearchBar.dart';
 import 'package:flutter_news/part2/content1/TabContentPage.dart';
+import 'package:flutter_news/routes/RouteManager.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -108,31 +109,43 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 //              onSearchSubmmit: _onSubmitData,
 //            );
 //          }));
-          Navigator.of(context).push(
-            PageRouteBuilder(
-                pageBuilder: (BuildContext context, Animation<double> animation,
-                    Animation<double> secondaryAnimation) {
-                  return SearchBar(
-                    Colors.white,
-                    onCancelSearch: _onCancelSeardch,
-                    onSearchChange: _onSearchChange,
-                    onSearchSubmmit: _onSubmitData,
-                  );
-                },
-                transitionsBuilder: (BuildContext context,
-                    Animation<double> animation,
-                    Animation<double> secondaryAnimation,
-                    Widget child) {
-                  return SlideTransition(
-                    position: Tween(
-                      begin: Offset(1.0, 0.0),
-                      end: Offset(0, 0),
-                    ).animate(animation),
-                    child: child,
-                  );
-                },
-                transitionDuration: Duration(milliseconds: 200)),
+
+          RouteManager.jumpPageWithAnim(
+            context,
+            SearchBar(
+              Colors.white,
+              onCancelSearch: _onCancelSeardch,
+              onSearchChange: _onSearchChange,
+              onSearchSubmmit: _onSubmitData,
+            ),
+            type: Type.RIGHT_TO_LEFT,
+            duration: 200,
           );
+//          Navigator.of(context).push(
+//            PageRouteBuilder(
+//                pageBuilder: (BuildContext context, Animation<double> animation,
+//                    Animation<double> secondaryAnimation) {
+//                  return SearchBar(
+//                    Colors.white,
+//                    onCancelSearch: _onCancelSeardch,
+//                    onSearchChange: _onSearchChange,
+//                    onSearchSubmmit: _onSubmitData,
+//                  );
+//                },
+//                transitionsBuilder: (BuildContext context,
+//                    Animation<double> animation,
+//                    Animation<double> secondaryAnimation,
+//                    Widget child) {
+//                  return SlideTransition(
+//                    position: Tween(
+//                      begin: Offset(1.0, 0.0),
+//                      end: Offset(0, 0),
+//                    ).animate(animation),
+//                    child: child,
+//                  );
+//                },
+//                transitionDuration: Duration(milliseconds: 300)),
+//          );
         },
       ),
       actions: <Widget>[
@@ -143,7 +156,8 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           onTap: () {
             print("热门");
-            Navigator.of(context).pushNamed("/hot");
+//            Navigator.of(context).pushNamed("/hot");
+            RouteManager.jumpPageWithName(context, "/hot");
           },
         ),
         InkWell(
@@ -156,7 +170,9 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           onTap: () {
             print("通知");
-            Navigator.of(context).pushNamed("/notice");
+//            Navigator.of(context).pushNamed("/notice");
+            RouteManager.jumpPageWithName(context, "/notice");
+//            RouteManager.jumpPageWithAnim(context, new NoticePage());
           },
         ),
         InkWell(

@@ -86,7 +86,8 @@ class SearchBarState extends State<SearchBar> {
           ),
           onPressed: widget.onCancelSearch,
         ),
-        titleSpacing: 0, //leading控件和输入框的间距
+        titleSpacing: 0,
+        //leading控件和输入框的间距
         title: TitleContents(widget.onSearchChange),
       ),
     );
@@ -231,7 +232,6 @@ class TitleContentsState extends State<TitleContents> {
           margin: EdgeInsets.all(5),
           child: Center(
             child: TextField(
-
               /// 文字有关的：
 
 //              obscureText: true, //密码
@@ -280,6 +280,13 @@ class TitleContentsState extends State<TitleContents> {
                   onTap: clearEditContent,
                 ),
                 focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(45)),
+                    borderSide: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                      style: BorderStyle.solid,
+                    )),
+                enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(45)),
                     borderSide: BorderSide(
                       color: Colors.grey,
