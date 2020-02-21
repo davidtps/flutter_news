@@ -52,6 +52,7 @@ flutter:
     - assets/image/tizhongkongzhiliang.png
     - assets/image/head.png
     - assets/image/shopping3.png
+    - assets/news.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

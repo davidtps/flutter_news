@@ -1,4 +1,12 @@
-//bean 文件
+// 网络实体类 json Dart文件
+
+// 接口模型 factory改造一下
+
+// 封装解析json 只需要传入 json字符串即可
+import 'dart:convert';
+
+//NewsModel newsModelFromJson(String str) => NewsModel.fromJson(json.decode(str));
+
 class NewsModel {
   List<Data> data;
 
@@ -12,6 +20,15 @@ class NewsModel {
       });
     }
   }
+
+//  // 改造成 factory 函数
+//  factory NewsModel.fromJson(Map<String, dynamic> json) {
+//    return NewsModel(
+//      data: List<Data>.from(
+//        json["data"].map((x) => Data.fromJson(x)),
+//      ),
+//    );
+//  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -85,6 +102,32 @@ class Data {
     replyCount = json['replyCount'];
   }
 
+//  factory Data.fromJson(Map<String, dynamic> json) {
+//    return Data(
+//      sourceId: json['sourceId'],
+//      articleId: json['article_id'],
+//      updateTime: json['update_time'],
+//      modifyTime: json['modify_time'],
+//      url: json['url'],
+//      title: json['title'],
+//      infos: json['infos'],
+//      subtitle: json['subtitle'],
+//      source: json['source'],
+//      tag: json['tag'],
+//      type: json['type'],
+//      thumb: json['thumb'],
+//      images: List<Images>.from(
+//        json["images"].map((x) {
+//          return Images.fromJson(x);
+//        }),
+//      ),
+//      postid: json['postid'],
+//      commentCount: json['commentCount'],
+//      votecount: json['votecount'],
+//      replyCount: json['replyCount'],
+//    );
+//  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['sourceId'] = this.sourceId;
@@ -118,6 +161,12 @@ class Images {
   Images.fromJson(Map<String, dynamic> json) {
     imgsrc = json['imgsrc'];
   }
+
+//  factory Images.fromJson(Map<String, dynamic> json) {
+//    return Images(
+//      imgsrc: json['imgsrc'],
+//    );
+//  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

@@ -238,7 +238,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
     tabController = TabController(
       length: tabs.length,
       vsync: this,
-      initialIndex: 1,
+      initialIndex: 0,
     );
   }
 
