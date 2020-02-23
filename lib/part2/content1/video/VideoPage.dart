@@ -50,7 +50,7 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
     videoTabControl = TabController(
       length: videoTabContents.length,
       vsync: this,
-      initialIndex: 0,
+      initialIndex: 1,
     );
   }
 

@@ -25,7 +25,6 @@ class HomeItemListPageState extends State<HomeItemListPage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
           NewsModel newsModel = NewsModel.fromJson(json.decode(snapshot.data));
-          print(newsModel.data[0].infos);
 //          NewsModel newsModel = newsModelFromJson(snapshot.data);
           for (var data in newsModel.data) {
             switch (data.type) {

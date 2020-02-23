@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_news/part2/model/SmallVideoModel.dart';
 import 'package:video_player/video_player.dart';
 
 class SmallVideoPage extends StatefulWidget {
@@ -11,181 +15,54 @@ class SmallVideoPageState extends State<SmallVideoPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//      appBar: new AppBar(
-//        title: new Text('小视频'),
-//      ),
-
-//      body: GridView(
-//        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//            crossAxisCount: 2,
-//            mainAxisSpacing: 5,
-//            crossAxisSpacing: 5,
-//            childAspectRatio: 1),
-//        children: <Widget>[
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          )
-//        ],
-//      ),
-
-//      body: GridView.count(
-//        crossAxisCount: 2,
-//        crossAxisSpacing: 5,
-//        mainAxisSpacing: 5,
-//        childAspectRatio: 9/16,
-//        children: <Widget>[
-//          Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ), Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ), Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ), Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ), Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          ),
-//        ],
-//      ),
-//      body: GridView.builder(
-//        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//            crossAxisCount: 2,
-//            mainAxisSpacing: 5,
-//            crossAxisSpacing: 5,
-//            childAspectRatio: 1),
-//        itemBuilder: (BuildContext context, int index) {
-//          return Container(
-//            width: 50,
-//            height: 50,
-//            color: Colors.teal,
-//          );
-//        },
-//        itemCount: 20,
-//      ),
-
-//      body: GridView.custom(
-//          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//              crossAxisCount: 3,
-//              mainAxisSpacing: 5,
-//              crossAxisSpacing: 5,
-//              childAspectRatio: 1),
-//          childrenDelegate: SliverChildListDelegate([
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            ),
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            ),
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            ),
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            ),
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            ),
-//            Container(
-//              width: 50,
-//              height: 50,
-//              color: Colors.teal,
-//            )
-//          ])),
-      body: buildVideoGridView(),
+      body: buildBodyView(),
     );
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
   }
 
-  List<String> initItemDatas() {
-    List<String> datas = [
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-clear-water-1559888911402.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-breathtaking-reflection-1572023479601.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2FHeaven.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2FOne-Swan.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-sunshine-between-white-grapes-1570036541225.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-clear-water-1559888911402.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-breathtaking-reflection-1572023479601.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2FHeaven.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2FOne-Swan.mp4',
-      'https://storage.googleapis.com/coverr-main/mp4%2Fcoverr-sunshine-between-white-grapes-1570036541225.mp4',
-    ];
-    return datas;
-  }
 
-  Widget buildVideoGridView() {
-    return GridView.count(
-      crossAxisCount: 2,
-      mainAxisSpacing: 5,
-      crossAxisSpacing: 5,
-      childAspectRatio: 9 / 16,
-      children: initItemDatas().map((data) {
-        return VideoPlayerPage(data);
-      }).toList(),
+  Widget buildBodyView() {
+    List<String> dataSources = [];
+    return FutureBuilder(
+//      future: DefaultAssetBundle.of(context).loadString("assets/videos.json"),
+      future: rootBundle.loadString("assets/videos.json"),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          SmallVideoModel smallVideoModel =
+          SmallVideoModel.fromJson(json.decode(snapshot.data));
+          for (int i = 0; i < smallVideoModel.data.length; i++) {
+//            print(smallVideoModel.data[i].url);
+            dataSources.add(smallVideoModel.data[i].url);
+          }
+          return buildVideoGridView(dataSources);
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
+}
+
+Widget buildVideoGridView(List<String> dataSources) {
+  return GridView.count(
+    crossAxisCount: 2,
+    mainAxisSpacing: 5,
+    crossAxisSpacing: 5,
+    childAspectRatio: 9 / 16,
+    children: dataSources.map((data) {
+//      print(data);
+      return VideoPlayerPage(data);
+    }).toList(),
+  );
 }
 
 class VideoPlayerPage extends StatefulWidget {
@@ -214,8 +91,8 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
             child: isInit
                 ? VideoPlayer(controller)
                 : Container(
-                    color: Colors.teal,
-                  ),
+              color: Colors.teal,
+            ),
           ),
           //进度条，视频初始化结束后就隐藏掉
           Visibility(
