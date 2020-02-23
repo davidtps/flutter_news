@@ -8,6 +8,7 @@ import 'package:flutter_news/part2/content1/DrawerPage.dart';
 import 'package:flutter_news/part2/content1/home/HomePage.dart';
 import 'package:flutter_news/part2/content1/HotPage.dart';
 import 'package:flutter_news/part2/content1/NoticePage.dart';
+import 'package:flutter_news/part2/content1/video/VideoPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -91,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //禁止滑动切换页面
         children: <Widget>[
           HomePage(),
-          SmallVideoPage(),
+          VideoPage(),
           HotPage(),
           NoticePage(),
         ],

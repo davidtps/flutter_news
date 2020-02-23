@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_news/part2/content1/home/HomeItemListPage.dart';
+import 'package:flutter_news/part2/content1/video/SmallVideoPage.dart';
+
+List<Widget> homeTabContents = [
+//  RecentPage(),
+  HomeItemListPage(),
+  Center(
+    child: Text('头条'),
+  ),
+  Text('视频'),
+  Text('娱乐'),
+  Text('体育'),
+  Text('新时代'),
+  Text('要闻'),
+  Text('段子'),
+  Text('知否'),
+  Text('上海'),
+  Text('公开课'),
+  Text('圈子'),
+  Text('财经'),
+  Text('科技'),
+  Text('汽车'),
+  Text('网易号'),
+  Text('军事'),
+  Text('时尚'),
+  Text('跟帖'),
+  Text('直播'),
+  Text('图片'),
+  Text('小视频'),
+  Text('NBA'),
+  Text('热点'),
+  Text('房产'),
+  Text('股票'),
+  Text('轻松一刻'),
+  Text('历史'),
+  Text('家居'),
+  Text('播单'),
+  Text('独家'),
+  Text('游戏'),
+  Text('健康'),
+  Text('航空'),
+  Text('小说'),
+  Text('热度'),
+];
+
+
+List<Widget> videoTabContents = [
+  Center(child: Text('推荐')),
+  // 小视频
+  // 新增一个 Key 保存当前的对象
+  SmallVideoPage(),
+  Center(child: Text('榜单')),
+  Center(child: Text('超级IP季')),
+  Center(child: Text('新农人')),
+  Center(child: Text('百年影像')),
+  Center(child: Text('播单')),
+  Center(child: Text('搞笑')),
+  Center(child: Text('影视')),
+  Center(child: Text('综艺')),
+  Center(child: Text('音乐')),
+  Center(child: Text('现场')),
+  Center(child: Text('黑科技')),
+  Center(child: Text('小品')),
+  Center(child: Text('萌物')),
+  Center(child: Text('军武')),
+  Center(child: Text('猎奇')),
+  Center(child: Text('二次元')),
+];
+
+List<String> videoTabsLabels = [
+  '推荐',
+  '小视频',
+  '榜单',
+  '超级IP季',
+  '新农人',
+  '百年影像',
+  '播单',
+  '搞笑',
+  '影视',
+  '综艺',
+  '音乐',
+  '现场',
+  '黑科技',
+  '小品',
+  '萌物',
+  '军武',
+  '猎奇',
+  '二次元',
+];
+

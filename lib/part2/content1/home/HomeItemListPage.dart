@@ -196,7 +196,6 @@ class HomeItemListPageState extends State<HomeItemListPage> {
 
   Widget bulidTag(String tag) {
     if (tag != null) {
-      if (tag.e)
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 10),
           child: Text(

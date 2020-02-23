@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/part2/content1/SearchBar.dart';
-import 'package:flutter_news/part2/content1/home/TabContentPage.dart';
+import 'package:flutter_news/part2/content1/TabContentPage.dart';
 import 'package:flutter_news/routes/RouteManager.dart';
 
 class HomePage extends StatefulWidget {
@@ -59,7 +59,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 //            child: Text('${tab.text}'),
 //          );
 //        }).toList(),
-          children: tabContents,
+          children: homeTabContents,
           controller: tabController,
         ));
   }
@@ -210,7 +210,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
               },
             ),
           ),
-          preferredSize: Size.fromHeight(50)),
+          preferredSize: Size.fromHeight(40)),
     );
   }
 
