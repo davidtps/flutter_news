@@ -29,9 +29,8 @@ class SmallVideoPageState extends State<SmallVideoPage> {
     super.dispose();
   }
 
-
   Widget buildBodyView() {
-    List<String> dataSources = [];
+    List<Data> dataSources = [];
     return FutureBuilder(
 //      future: DefaultAssetBundle.of(context).loadString("assets/videos.json"),
       future: rootBundle.loadString("assets/videos.json"),
@@ -40,8 +39,10 @@ class SmallVideoPageState extends State<SmallVideoPage> {
           SmallVideoModel smallVideoModel =
           SmallVideoModel.fromJson(json.decode(snapshot.data));
           for (int i = 0; i < smallVideoModel.data.length; i++) {
-//            print(smallVideoModel.data[i].url);
-            dataSources.add(smallVideoModel.data[i].url);
+            Data data = smallVideoModel.data[i];
+
+//            dataSources.add(smallVideoModel.data[i].url);
+            dataSources.add(data);
           }
           return buildVideoGridView(dataSources);
         } else {
@@ -52,7 +53,7 @@ class SmallVideoPageState extends State<SmallVideoPage> {
   }
 }
 
-Widget buildVideoGridView(List<String> dataSources) {
+Widget buildVideoGridView(List<Data> dataSources) {
   return GridView.count(
     crossAxisCount: 2,
     mainAxisSpacing: 5,
@@ -66,7 +67,7 @@ Widget buildVideoGridView(List<String> dataSources) {
 }
 
 class VideoPlayerPage extends StatefulWidget {
-  String dataSource;
+  Data dataSource;
 
   VideoPlayerPage(this.dataSource);
 
@@ -88,11 +89,7 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
           SizedBox(
             width: width,
             height: 300,
-            child: isInit
-                ? VideoPlayer(controller)
-                : Container(
-              color: Colors.teal,
-            ),
+            child: buildVideoItem(widget.dataSource, controller),
           ),
           //进度条，视频初始化结束后就隐藏掉
           Visibility(
@@ -121,10 +118,75 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
+  Widget buildVideoItem(Data data, VideoPlayerController controller) {
+    String playResult = "";
+    double playCount = double.parse(data.viewCounts);
+    if (playCount > 10000) {
+      double temp = playCount / 10000;
+      playResult = "${temp.toStringAsFixed(1)}万"; //截取小数点后一位
+    } else {
+      playResult = "$playCount";
+    }
+    return Stack(
+      children: <Widget>[
+        isInit
+            ? VideoPlayer(controller)
+            : Container(
+          color: Colors.teal,
+        ),
+        Positioned(
+          bottom: 10,
+//          width: (width - 20) / 2,
+          left: 0,
+          right: 0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                child: Text(
+                  data.title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 5),
+              ),
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(
+                      "${playResult}次播放",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "${data.votecount}人点赞",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.network(widget.dataSource);
+    controller = VideoPlayerController.network(widget.dataSource.url);
     controller.initialize();
     controller.setVolume(102);
     controller.setLooping(true);
