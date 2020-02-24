@@ -15,26 +15,38 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
       appBar: new AppBar(
         title: new Text('视频'),
         bottom: PreferredSize(
-          child: TabBar(
-            tabs: videoTabsLabels.map((label) {
-              return Tab(
-                child: Text(label),
-//                text: label,
-              );
-            }).toList(),
-            controller: videoTabControl,
-            isScrollable: true,
-            labelColor: Colors.white,
-            onTap: (index) {
-              setState(() {
-                videoTabControl.index = index;
-              });
-            },
-//              labelStyle: TextStyle(height: 50),
-//              labelPadding: EdgeInsets.all(5),
-            indicatorWeight: 3,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: TabBar(
+                  tabs: videoTabsLabels.map((label) {
+                    return Tab(
+                      child: Text(label),
+                    );
+                  }).toList(),
+                  controller: videoTabControl,
+                  isScrollable: true,
+                  labelColor: Colors.white,
+                  onTap: (index) {
+                    setState(() {
+                      videoTabControl.index = index;
+                    });
+                  },
+                  indicatorWeight: 3,
+                ),
+                flex: 9,
+              ),
+              Expanded(
+                child: Icon(
+                  Icons.search,
+                  size: 20,
+                  color: Colors.grey,
+                ),
+                flex: 1,
+              )
+            ],
           ),
-          preferredSize: Size.fromHeight(40),
+          preferredSize: Size.fromHeight(-6),
         ),
       ),
       body: TabBarView(
