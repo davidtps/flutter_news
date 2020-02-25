@@ -10,45 +10,6 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController tabController;
-  final List<Tab> tabs = [
-    Tab(text: '关注'),
-    Tab(text: '头条'),
-    Tab(text: '视频'),
-    Tab(text: '娱乐'),
-    Tab(text: '体育'),
-    Tab(text: '新时代'),
-    Tab(text: '要闻'),
-    Tab(text: '段子'),
-    Tab(text: '知否'),
-    Tab(text: '上海'),
-    Tab(text: '公开课'),
-    Tab(text: '圈子'),
-    Tab(text: '财经'),
-    Tab(text: '科技'),
-    Tab(text: '汽车'),
-    Tab(text: '网易号'),
-    Tab(text: '军事'),
-    Tab(text: '时尚'),
-    Tab(text: '跟帖'),
-    Tab(text: '直播'),
-    Tab(text: '图片'),
-    Tab(text: '小视频'),
-    Tab(text: 'NBA'),
-    Tab(text: '热点'),
-    Tab(text: '房产'),
-    Tab(text: '股票'),
-    Tab(text: '轻松一刻'),
-    Tab(text: '历史'),
-    Tab(text: '家居'),
-    Tab(text: '播单'),
-    Tab(text: '独家'),
-    Tab(text: '游戏'),
-    Tab(text: '健康'),
-    Tab(text: '航空'),
-    Tab(text: '小说'),
-    Tab(text: '热度'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -196,7 +157,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
             //tabs 背景色
             color: Colors.redAccent,
             child: TabBar(
-              tabs: tabs,
+              tabs: homeTabs,
               controller: tabController,
               isScrollable: true,
               //label
@@ -236,7 +197,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(
-      length: tabs.length,
+      length: homeTabs.length,
       vsync: this,
       initialIndex: 0,
     );

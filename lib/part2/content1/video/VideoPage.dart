@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/part2/content1/SearchBar.dart';
 import 'package:flutter_news/part2/content1/TabContentPage.dart';
+import 'package:flutter_news/routes/RouteManager.dart';
 
 class VideoPage extends StatefulWidget {
   @override
@@ -8,6 +10,7 @@ class VideoPage extends StatefulWidget {
 
 class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   TabController videoTabControl;
+  List<Tab> videoTabs;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +22,7 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
             children: <Widget>[
               Expanded(
                 child: TabBar(
-                  tabs: videoTabsLabels.map((label) {
-                    return Tab(
-                      child: Text(label),
-                    );
-                  }).toList(),
+                  tabs: videoTabs,
                   controller: videoTabControl,
                   isScrollable: true,
                   labelColor: Colors.white,
@@ -37,10 +36,22 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
                 flex: 9,
               ),
               Expanded(
-                child: Icon(
-                  Icons.search,
-                  size: 20,
-                  color: Colors.grey,
+                child: GestureDetector(
+                  child: Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    RouteManager.jumpPageWithAnim(
+                        context,
+                        SearchBar(Colors.white, onCancelSearch: () {
+                          Navigator.pop(context);
+                        }, onSearchChange: null, onSearchSubmmit: null));
+                  },
                 ),
                 flex: 1,
               )
@@ -64,6 +75,11 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
       vsync: this,
       initialIndex: 1,
     );
+    videoTabs = videoTabsLabels.map((label) {
+      return Tab(
+        child: Text(label),
+      );
+    }).toList();
   }
 
   @override
