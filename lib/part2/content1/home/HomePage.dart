@@ -196,6 +196,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    print("home initState()");
     tabController = TabController(
       length: homeTabs.length,
       vsync: this,
@@ -206,6 +207,7 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
+    print("home dispose");
     tabController.dispose();
   }
 }

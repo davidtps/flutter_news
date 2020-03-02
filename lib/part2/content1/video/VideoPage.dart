@@ -17,10 +17,12 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    print("video initState()");
   }
 
   @override
   void dispose() {
     super.dispose();
+    print("video dispose");
   }
 }
