@@ -1,16 +1,26 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/part2/content1/SearchBar.dart';
 import 'package:flutter_news/routes/RouteManager.dart';
 
 class TabComponent extends StatefulWidget {
+  List<Tab> tabs;
   List<String> tabLabels;
   List<Widget> tabContents;
 
   bool isShowSearch;
+  bool isScrollable;
+
+
+  Color backgroundColor;
+  Brightness brightness;
 
   TabComponent(this.tabLabels,
       this.tabContents, {
         this.isShowSearch = false,
+        this.isScrollable = true,
+        this.backgroundColor = Colors.red,
+        this.brightness = Brightness.dark,
       });
 
   @override
@@ -26,7 +36,10 @@ class TabComponentState extends State<TabComponent>
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('视频'),
-        toolbarOpacity: 0, //可以完全隐藏title,只让bottom widget显示；可以直接让title为对应的widget
+        toolbarOpacity: 0,
+        //可以完全隐藏title,只让bottom widget显示；可以直接让title为对应的widget
+        backgroundColor: widget.backgroundColor,
+        brightness: widget.brightness,
         bottom: PreferredSize(
           child: Row(
             children: <Widget>[
@@ -76,6 +89,20 @@ class TabComponentState extends State<TabComponent>
       vsync: this,
       initialIndex: 0,
     );
+
+    widget.tabs = widget.tabLabels.map((label) {
+      return Tab(
+        child: Text(
+          label,
+
+//不设置style,label相关样式才会生效
+//            style: TextStyle
+//              color: Colors.black,
+//              fontSize: 14,
+//            ),
+        ),
+      );
+    }).toList();
   }
 
   @override
@@ -88,15 +115,20 @@ class TabComponentState extends State<TabComponent>
   //tabbar 页签
   Widget buildTabbar() {
     return TabBar(
-      tabs: widget.tabLabels.map((label) {
-        return Tab(
-          child: Text(label),
-        );
-      }).toList(),
+      tabs: widget.tabs,
+
       controller: _tabController,
-      isScrollable: true,
+      isScrollable: widget.isScrollable,
+      dragStartBehavior: DragStartBehavior.start,
       labelColor: Colors.white,
-      indicatorWeight: 3,
+      labelStyle: TextStyle(color: Colors.white, fontSize: 14),
+      unselectedLabelColor: Colors.yellow,
+      unselectedLabelStyle: TextStyle(color: Colors.white, fontSize: 14),
+      //指示器宽度，跟随label/tab
+      indicatorSize: TabBarIndicatorSize.tab,
+      indicatorColor: Colors.white,
+      indicatorPadding: EdgeInsets.symmetric(horizontal: 5),
+      indicatorWeight: 2,
       onTap: (index) {
         setState(() {
           _tabController.index = index;

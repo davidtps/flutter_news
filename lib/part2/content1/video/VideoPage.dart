@@ -11,7 +11,11 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return TabComponent(
-      videoTabsLabels, videoTabContents, isShowSearch: false,);
+      videoTabsLabels,
+      videoTabContents,
+      isShowSearch: true,
+      backgroundColor: Colors.redAccent,
+    );
   }
 
   @override
