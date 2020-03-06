@@ -57,12 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    print("main initstate");
     pageController = PageController(initialPage: _currentIndex);
   }
 
   @override
   void dispose() {
     super.dispose();
+    print("main dispose");
     pageController.dispose();
   }
 

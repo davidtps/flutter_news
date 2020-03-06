@@ -8,27 +8,32 @@ class TabComponent extends StatefulWidget {
   List<String> tabLabels;
   List<Widget> tabContents;
 
+  VoidCallback onCancelSearch;
+  SearchChangeCallback onSearchChange;
   bool isShowSearch;
   bool isScrollable;
-
+  int result = 0;
 
   Color backgroundColor;
   Brightness brightness;
 
   TabComponent(this.tabLabels,
       this.tabContents, {
+        Key key,
+        this.onSearchChange,
+        this.onCancelSearch,
         this.isShowSearch = false,
         this.isScrollable = true,
         this.backgroundColor = Colors.red,
         this.brightness = Brightness.dark,
-      });
+      }) : super(key: key);
 
   @override
   TabComponentState createState() => new TabComponentState();
 }
 
 class TabComponentState extends State<TabComponent>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
 
   @override
@@ -62,9 +67,11 @@ class TabComponentState extends State<TabComponent>
                       onTap: () {
                         RouteManager.jumpPageWithAnim(
                             context,
-                            SearchBar(Colors.white, onCancelSearch: () {
-                              Navigator.pop(context);
-                            }, onSearchChange: null, onSearchSubmmit: null));
+                            SearchBar(Colors.white,
+                                //需要外部传入，将searchbar界面返回掉
+                                onCancelSearch: widget.onCancelSearch,
+                                onSearchChange: widget.onSearchChange,
+                                onSearchSubmmit: null));
                       },
                     ),
                     flex: 1,
@@ -74,6 +81,7 @@ class TabComponentState extends State<TabComponent>
         ),
       ),
       body: TabBarView(
+        key: ObjectKey(widget.result),
         children: widget.tabContents,
         controller: _tabController,
       ),
@@ -87,7 +95,7 @@ class TabComponentState extends State<TabComponent>
     _tabController = TabController(
       length: widget.tabLabels.length,
       vsync: this,
-      initialIndex: 0,
+      initialIndex: widget.result,
     );
 
     widget.tabs = widget.tabLabels.map((label) {
@@ -115,6 +123,8 @@ class TabComponentState extends State<TabComponent>
   //tabbar 页签
   Widget buildTabbar() {
     return TabBar(
+      //通过给TabComponent构造函数中，加入了key之后，
+      // widget.tabs！=null 的报错就解决了，但是返回到视频首页，tab的定位还没解决
       tabs: widget.tabs,
 
       controller: _tabController,
@@ -131,9 +141,13 @@ class TabComponentState extends State<TabComponent>
       indicatorWeight: 2,
       onTap: (index) {
         setState(() {
-          _tabController.index = index;
+          widget.result = index;
         });
       },
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

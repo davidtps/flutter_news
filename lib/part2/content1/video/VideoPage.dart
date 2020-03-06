@@ -7,14 +7,17 @@ class VideoPage extends StatefulWidget {
   VideoPageState createState() => new VideoPageState();
 }
 
-class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
+class VideoPageState extends State<VideoPage> {
   @override
   Widget build(BuildContext context) {
     return TabComponent(
       videoTabsLabels,
       videoTabContents,
       isShowSearch: true,
+      onSearchChange: _onSearchChange,
+      onCancelSearch: _onCancelSearch,
       backgroundColor: Colors.redAccent,
+      key: ObjectKey(new VideoPage()),
     );
   }
 
@@ -28,5 +31,13 @@ class VideoPageState extends State<VideoPage> with TickerProviderStateMixin {
   void dispose() {
     super.dispose();
     print("video dispose");
+  }
+
+  void _onCancelSearch() {
+    Navigator.pop(context);
+  }
+
+  void _onSearchChange(String data) {
+    print("tabcomponent $data");
   }
 }
