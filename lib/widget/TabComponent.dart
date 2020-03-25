@@ -36,6 +36,8 @@ class TabComponentState extends State<TabComponent>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController;
 
+  Tab currentTab;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -99,7 +101,7 @@ class TabComponentState extends State<TabComponent>
     );
 
     widget.tabs = widget.tabLabels.map((label) {
-      return Tab(
+      currentTab = Tab(
         child: Text(
           label,
 
@@ -110,6 +112,7 @@ class TabComponentState extends State<TabComponent>
 //            ),
         ),
       );
+      return currentTab;
     }).toList();
   }
 
@@ -123,6 +126,7 @@ class TabComponentState extends State<TabComponent>
   //tabbar 页签
   Widget buildTabbar() {
     return TabBar(
+      key: PageStorageKey<Tab>(currentTab),
       //通过给TabComponent构造函数中，加入了key之后，
       // widget.tabs！=null 的报错就解决了，但是返回到视频首页，tab的定位还没解决
       tabs: widget.tabs,

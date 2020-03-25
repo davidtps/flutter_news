@@ -91,4 +91,8 @@ class RouteManager {
       return widget;
     }));
   }
+
+  static exitCurrentPage(BuildContext context) {
+    Navigator.pop(context);
+  }
 }

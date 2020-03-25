@@ -3,9 +3,13 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_news/part2/content1/video/SmallVideoDetailPage.dart';
 import 'package:flutter_news/part2/model/SmallVideoModel.dart';
-import 'package:video_player/video_player.dart';
+import 'package:flutter_news/routes/RouteManager.dart';
 
+/**
+ * 小视频页面
+ */
 class SmallVideoPage extends StatefulWidget {
   @override
   SmallVideoPageState createState() => new SmallVideoPageState();
@@ -61,24 +65,22 @@ Widget buildVideoGridView(List<Data> dataSources) {
     childAspectRatio: 9 / 16,
     children: dataSources.map((data) {
 //      print(data);
-      return VideoPlayerPage(data);
+      return VideoPlayerThumbnailPage(data);
     }).toList(),
   );
 }
 
-class VideoPlayerPage extends StatefulWidget {
+class VideoPlayerThumbnailPage extends StatefulWidget {
   Data dataSource;
 
-  VideoPlayerPage(this.dataSource);
+  VideoPlayerThumbnailPage(this.dataSource);
 
   @override
-  VideoPlayerPageState createState() => new VideoPlayerPageState();
+  VideoPlayerThumbnailPageState createState() =>
+      new VideoPlayerThumbnailPageState();
 }
 
-class VideoPlayerPageState extends State<VideoPlayerPage> {
-  VideoPlayerController controller;
-  bool isInit = false;
-
+class VideoPlayerThumbnailPageState extends State<VideoPlayerThumbnailPage> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -88,37 +90,18 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
         children: <Widget>[
           SizedBox(
             width: width,
-            height: 300,
-            child: buildVideoItem(widget.dataSource, controller),
+            child: buildVideoItem(widget.dataSource),
           ),
-          //进度条，视频初始化结束后就隐藏掉
-          Visibility(
-              visible: true, //!isInit,
-              child: Container(
-                height: 10,
-                child: VideoProgressIndicator(
-                  controller,
-                  allowScrubbing: true,
-                  colors: VideoProgressColors(
-                      backgroundColor: Colors.grey,
-                      bufferedColor: Colors.yellow,
-                      playedColor: Colors.redAccent[200]),
-                ),
-              )),
         ],
       ),
       onTap: () {
-        if (controller.value.isPlaying) {
-          controller.pause();
-        } else {
-          controller.play();
-        }
-        setState(() {});
+        RouteManager.jumpPageCommon(
+            context, SmallVideoDetailPage(widget.dataSource));
       },
     );
   }
 
-  Widget buildVideoItem(Data data, VideoPlayerController controller) {
+  Widget buildVideoItem(Data data) {
     String playResult = "";
     double playCount = double.parse(data.viewCounts);
     if (playCount > 10000) {
@@ -129,9 +112,8 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
     }
     return Stack(
       children: <Widget>[
-        isInit
-            ? VideoPlayer(controller)
-            : Container(
+        Container(
+          height: 300,
           color: Colors.teal,
         ),
         Positioned(
@@ -186,27 +168,10 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.network(widget.dataSource.url);
-    controller.initialize();
-    controller.setVolume(102);
-    controller.setLooping(true);
-    controller.addListener(() {
-      print(controller.value);
-
-      if (isInit != controller.value.initialized) {
-        isInit = controller.value.initialized;
-        setState(() {});
-      }
-      //播放错误输出日志
-      if (controller.value.hasError) {
-        print(controller.value.errorDescription);
-      }
-    });
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 }

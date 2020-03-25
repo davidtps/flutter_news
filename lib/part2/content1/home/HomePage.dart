@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> with TickerProviderStateMixin {
   TabController tabController;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -146,7 +147,9 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
 //            Navigator.of(context).pushNamed("/allitems");
             jumpAllItemPage().then((index) {
               setState(() {
-                tabController.index = index;
+                if (index != null) {
+                  tabController.index = index;
+                }
               });
             });
           },
