@@ -23,11 +23,11 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
     double height = MediaQuery.of(context).size.height;
     return new GestureDetector(
       //追加手势点击事件
-      child: Column(
+      child: Stack(
         children: <Widget>[
           SizedBox(
             width: width,
-            height: height - 10,
+            height: height,
             child: isInit
                 ? VideoPlayer(controller)
                 : Container(
@@ -35,19 +35,24 @@ class VideoPlayerPageState extends State<VideoPlayerPage> {
                   ),
           ),
           //进度条，视频初始化结束后就隐藏掉
-          Visibility(
-              visible: true, //!isInit,
-              child: Container(
-                height: 10,
-                child: VideoProgressIndicator(
-                  controller,
-                  allowScrubbing: true,
-                  colors: VideoProgressColors(
-                      backgroundColor: Colors.grey,
-                      bufferedColor: Colors.yellow,
-                      playedColor: Colors.redAccent[200]),
-                ),
-              )),
+          Positioned(
+            bottom: 2,
+            left: 0,
+            right: 0,
+            child: Visibility(
+                visible: true, //!isInit,
+                child: Container(
+                  height: 8,
+                  child: VideoProgressIndicator(
+                    controller,
+                    allowScrubbing: true,
+                    colors: VideoProgressColors(
+                        backgroundColor: Colors.grey,
+                        bufferedColor: Colors.yellow,
+                        playedColor: Colors.redAccent[200]),
+                  ),
+                )),
+          )
         ],
       ),
       onTap: () {

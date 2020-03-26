@@ -25,15 +25,28 @@ class SmallVideoDetailPageState extends State<SmallVideoDetailPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Stack(
-        children: <Widget>[
-          VideoPlayerPage(widget.data.source),
-          builtDetailTitle(context),
-          builtDetailBottomLayout(),
-          buildDetailRightLayout(),
-        ],
-      ),
-    );
+        body: Stack(
+          children: <Widget>[
+            VideoPlayerPage(widget.data.source),
+            builtDetailTitle(context),
+            builtDetailBottomLayout(),
+            buildDetailRightLayout(),
+          ],
+        ));
+
+//    return new Scaffold(body: Builder(
+//        // Create an inner BuildContext so that the onPressed methods
+//        // can refer to the Scaffold with Scaffold.of().
+//        builder: (BuildContext context) {
+//      return Stack(
+//        children: <Widget>[
+//          VideoPlayerPage(widget.data.source),
+//          builtDetailTitle(context),
+//          builtDetailBottomLayout(),
+//          buildDetailRightLayout(),
+//        ],
+//      );
+//    }));
   }
 
   @override
@@ -298,27 +311,105 @@ class SmallVideoDetailPageState extends State<SmallVideoDetailPage> {
   }
 
   void showBottomMenuDialog(BuildContext context) {
-    Scaffold.of(context).showBottomSheet((context) {
-      return Column(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              buildBottomSheetItem(Icons.star, "收藏"),
-              buildBottomSheetItem(Icons.library_books, "不感兴趣"),
-              buildBottomSheetItem(Icons.warning, "举报内容")
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.all(5),
-            color: Colors.white,
-            child: Text(
-              "关闭",
-              style: TextStyle(color: Colors.black, fontSize: 24),
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 120,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    buildGesture(
+                          () {
+                        print("收藏");
+                      },
+                      buildBottomSheetItem(Icons.star, "收藏"),
+                    ),
+                    buildGesture(
+                          () {
+                        print("不感兴趣");
+                      },
+                      buildBottomSheetItem(Icons.library_books, "不感兴趣"),
+                    ),
+                    buildGesture(() {
+                      print("举报内容");
+                    }, buildBottomSheetItem(Icons.warning, "举报内容"))
+                  ],
+                ),
+                buildGesture(() {
+                  RouteManager.exitCurrentPage(context);
+                },
+                    Container(
+                      width: width,
+                      height: 30,
+                      color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          "关闭",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
+                      ),
+                    ))
+              ],
             ),
-          )
-        ],
-      );
-    });
+          );
+        });
+//    Scaffold.of(context).showBottomSheet((context) {
+//      return Container(
+//        height: 120,
+//        child: Column(
+//          children: <Widget>[
+//            Row(
+//              children: <Widget>[
+//                buildGesture(
+//                  () {
+//                    print("收藏");
+//                  },
+//                  buildBottomSheetItem(Icons.star, "收藏"),
+//                ),
+//                buildGesture(
+//                      () {
+//                    print("不感兴趣");
+//                  },
+//                  buildBottomSheetItem(Icons.library_books, "不感兴趣"),
+//                ),
+//                buildGesture(
+//                      () {
+//                    print("举报内容");
+//                  },
+//                    buildBottomSheetItem(Icons.warning, "举报内容")
+//                )
+//
+//
+//              ],
+//            ),
+//            buildGesture(
+//                    () {
+//                  RouteManager.exitCurrentPage(context);
+//                },
+//                Container(
+//                  width: width,
+//                  height: 30,
+//                  color: Colors.white,
+//                  child: Center(
+//                    child: Text(
+//                      "关闭",
+//                      style: TextStyle(color: Colors.black, fontSize: 20),
+//                    ),
+//                  ),
+//                )
+//            )
+//
+//          ],
+//        ),
+//      );
+//    });
+
 // showBottomSheet(
 //        context: context,
 //        builder: (context) {
@@ -345,23 +436,27 @@ class SmallVideoDetailPageState extends State<SmallVideoDetailPage> {
   }
 
   Widget buildBottomSheetItem(IconData icon, String subTitle) {
-    return Row(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(5),
-          child: Icon(
-            icon,
-            size: 20,
+    return new Container(
+      margin: EdgeInsets.all(8),
+      child: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(5),
+            child: Icon(
+              icon,
+              size: 40,
+              color: Colors.black,
+            ),
           ),
-        ),
-        Text(
-          subTitle,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.black,
-          ),
-        )
-      ],
+          Text(
+            subTitle,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

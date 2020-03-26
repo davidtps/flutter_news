@@ -113,7 +113,7 @@ class VideoPlayerThumbnailPageState extends State<VideoPlayerThumbnailPage> {
     return Stack(
       children: <Widget>[
         Container(
-          height: 300,
+          height: 315,
           color: Colors.teal,
         ),
         Positioned(
