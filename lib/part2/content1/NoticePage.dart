@@ -10,7 +10,7 @@ class NoticePageState extends State<NoticePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('通知'),
+        title: new Text('圈子'),
       ),
     );
   }

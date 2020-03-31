@@ -6,7 +6,7 @@ import 'package:flutter_news/part1/SmallVideoPage.dart';
 import 'package:flutter_news/part2/content1/AllItemsPage.dart';
 import 'package:flutter_news/part2/content1/DrawerPage.dart';
 import 'package:flutter_news/part2/content1/home/HomePage.dart';
-import 'package:flutter_news/part2/content1/HotPage.dart';
+import 'package:flutter_news/part2/content1/hot/HotPage.dart';
 import 'package:flutter_news/part2/content1/NoticePage.dart';
 import 'package:flutter_news/part2/content1/video/VideoPage.dart';
 
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
             activeIcon: Icon(Icons.videocam),
           ),
           BottomNavigationBarItem(
-            title: Text("圈子"),
+            title: Text("热门"),
             icon: Icon(
               Icons.my_location,
               size: 24,
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
             activeIcon: Icon(Icons.my_location),
           ),
           BottomNavigationBarItem(
-            title: Text("我的"),
+            title: Text("圈子"),
             icon: Icon(
               Icons.face,
               size: 24,

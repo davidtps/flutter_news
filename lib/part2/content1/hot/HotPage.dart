@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news/part2/content1/TabContentPage.dart';
+import 'package:flutter_news/widget/TabComponent.dart';
 
 class HotPage extends StatefulWidget {
   @override
@@ -8,10 +10,12 @@ class HotPage extends StatefulWidget {
 class HotPageState extends State<HotPage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('热门'),
-      ),
+    return TabComponent(
+      hotTabsLabels,
+      hotTabContents,
+      isShowSearch: false,
+      backgroundColor: Colors.redAccent,
+      key: ObjectKey(new HotPage()),
     );
   }
 

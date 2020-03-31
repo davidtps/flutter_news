@@ -125,3 +125,15 @@ List<String> videoTabsLabels = [
   '猎奇',
   '二次元',
 ];
+List<Widget> hotTabContents = [
+  Center(child: Text('推荐')),
+  // 小视频
+  // 新增一个 Key 保存当前的对象
+  SmallVideoPage(),
+];
+
+List<String> hotTabsLabels = [
+  '推荐',
+  '小视频',
+  '榜单',
+];
