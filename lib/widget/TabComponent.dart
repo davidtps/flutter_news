@@ -15,11 +15,17 @@ class TabComponent extends StatefulWidget {
   int result = 0;
 
   Color backgroundColor;
+  Color selectLabelColor;
+  Color unSelectLabelColor;
+  Color indicatorColor;
   Brightness brightness;
 
   TabComponent(this.tabLabels,
       this.tabContents, {
         Key key,
+        this.selectLabelColor,
+        this.unSelectLabelColor,
+        this.indicatorColor,
         this.onSearchChange,
         this.onCancelSearch,
         this.isShowSearch = false,
@@ -134,14 +140,19 @@ class TabComponentState extends State<TabComponent>
       controller: _tabController,
       isScrollable: widget.isScrollable,
       dragStartBehavior: DragStartBehavior.start,
-      labelColor: Colors.white,
-      labelStyle: TextStyle(color: Colors.white, fontSize: 14),
-      unselectedLabelColor: Colors.yellow,
-      unselectedLabelStyle: TextStyle(color: Colors.white, fontSize: 14),
+      labelColor: widget.selectLabelColor == null
+          ? Colors.white
+          : widget.selectLabelColor,
+      labelStyle: TextStyle(fontSize: 16),
+      unselectedLabelColor: widget.unSelectLabelColor == null
+          ? Colors.yellow
+          : widget.unSelectLabelColor,
+      unselectedLabelStyle: TextStyle(fontSize: 16),
       //指示器宽度，跟随label/tab
-      indicatorSize: TabBarIndicatorSize.tab,
-      indicatorColor: Colors.white,
-      indicatorPadding: EdgeInsets.symmetric(horizontal: 5),
+      indicatorSize: TabBarIndicatorSize.label,
+      indicatorColor:
+      widget.indicatorColor == null ? Colors.white : widget.indicatorColor,
+//      indicatorPadding: EdgeInsets.symmetric(horizontal: 5),
       indicatorWeight: 2,
       onTap: (index) {
         setState(() {

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/part2/content1/home/HomeItemListPage.dart';
+import 'package:flutter_news/part2/content1/hot/CommentHotPage.dart';
+import 'package:flutter_news/part2/content1/hot/CurrentHotPage.dart';
+import 'package:flutter_news/part2/content1/hot/RecommendHotPage.dart';
 import 'package:flutter_news/part2/content1/video/SmallVideoPage.dart';
 
 List<Widget> homeTabContents = [
@@ -126,14 +129,13 @@ List<String> videoTabsLabels = [
   '二次元',
 ];
 List<Widget> hotTabContents = [
-  Center(child: Text('推荐')),
-  // 小视频
-  // 新增一个 Key 保存当前的对象
-  SmallVideoPage(),
+  CurrentHotPage(),
+  CommentHotPage(),
+  RecommendHotPage(),
 ];
 
 List<String> hotTabsLabels = [
-  '推荐',
-  '小视频',
-  '榜单',
+  '实时热榜',
+  '跟帖热议',
+  '独家推荐',
 ];

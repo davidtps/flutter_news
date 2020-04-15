@@ -14,7 +14,12 @@ class HotPageState extends State<HotPage> {
       hotTabsLabels,
       hotTabContents,
       isShowSearch: false,
-      backgroundColor: Colors.redAccent,
+      isScrollable: false,
+      selectLabelColor: Colors.red,
+      unSelectLabelColor: Colors.black,
+      indicatorColor: Colors.red,
+      backgroundColor: Colors.white,
+      brightness: Brightness.light,
       key: ObjectKey(new HotPage()),
     );
   }

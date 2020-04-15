@@ -54,6 +54,9 @@ flutter:
     - assets/image/shopping3.png
     - assets/news.json
     - assets/videos.json
+    - assets/hot_comment.json
+    - assets/hot_current.json
+    - assets/hot_recommend.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
